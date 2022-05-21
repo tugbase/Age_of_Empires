@@ -1,0 +1,47 @@
+<h2>Ages</h2>
+<button class="button-1" (click)="ageFunc('All')">All</button>
+<button class="button-1" (click)="ageFunc('Dark')">Dark</button>
+<button class="button-1" (click)="ageFunc('Feudal')">Feudal</button>
+<button class="button-1" (click)="ageFunc('Castle')">Castle</button>
+<button class="button-1" (click)="ageFunc('Imperial')">Imperial</button>
+
+<section class="section">
+
+  <mat-checkbox class="margin" [(ngModel)]="toggle1">Food</mat-checkbox>
+  <label class="example-value-label">{{value}}</label>
+  <mat-slider class="slider" thumbLabel tickInterval="5" step="5" min="0" max="200" aria-label="units"
+    [disabled]="!toggle1" [(ngModel)]="value" (change)="filtered()"></mat-slider>
+
+  <mat-checkbox class="margin" [(ngModel)]="toggle2">Gold</mat-checkbox>
+  <label class="example-value-label">{{value1}}</label>
+  <mat-slider class="slider1" thumbLabel tickInterval="5" step="5" min="0" max="200" aria-label="units"
+    [disabled]="!toggle2" [(ngModel)]="value1" (change)="filtered()"></mat-slider>
+
+  <mat-checkbox class="margin" [(ngModel)]="toggle3">Wood</mat-checkbox>
+  <label class="example-value-label">{{value2}}</label>
+  <mat-slider class="slider2" thumbLabel tickInterval="5" step="5" min="0" max="200" aria-label="units"
+    [disabled]="!toggle3" [(ngModel)]="value2" (change)="filtered()"></mat-slider>
+
+</section>
+
+<table>
+  <thead>
+    <tr>
+      <th>id</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Costs</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let member of filteredList" (click)="onRowClick(member)">
+      <td>{{member.id}}</td>
+      <td>{{member.name}}</td>
+      <td>{{member.age}}</td>
+      <td>{{ member.cost?.Food ? 'Food:' + member.cost.Food : '' }}
+        {{ member.cost?.Wood ? 'Wood:' + member.cost.Wood : '' }}
+        {{ member.cost?.Gold ? 'Gold:' + member.cost.Gold : '' }}
+      </td>
+    </tr>
+  </tbody>
+</table>
